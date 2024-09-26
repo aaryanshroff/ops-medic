@@ -4,6 +4,7 @@ resource "aws_lambda_function" "ops_medic_lambda" {
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "lambda_function.lambda_handler"
   runtime       = "python3.11"
+  layers        = [aws_lambda_layer_version.lambda_layer.arn]
 }
 
 resource "aws_lambda_permission" "api_gateway" {

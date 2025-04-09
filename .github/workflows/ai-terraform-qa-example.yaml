@@ -14,6 +14,11 @@ jobs:
     permissions:
       actions: read
       contents: read
+      id-token: write
+    env:
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      GITHUB_RUN_ID: ${{ github.run_id }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: aaryanshroff/ai-terraform-qa-action@v0.0.3
         with:

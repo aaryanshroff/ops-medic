@@ -21,3 +21,4 @@ jobs:
       - uses: aaryanshroff/ai-terraform-qa-action@v0.0.3
         with:
           tf_apply_job: "terraform-apply"
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}

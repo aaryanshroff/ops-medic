@@ -19,6 +19,7 @@ variable "iam_permissions" {
     "s3:DeleteBucket",
     "s3:PutBucketVersioning",
     "s3:GetBucketVersioning",
-    "s3:GetBucketPolicy"
+    "s3:GetBucketPolicy",
+    "s3:GetBucketAcl"
   ]
 }

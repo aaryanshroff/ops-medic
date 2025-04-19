@@ -13,13 +13,12 @@ variable "iam_permissions" {
   description = "List of IAM permissions to grant to the role"
   type        = list(string)
   default     = [
-    "s3:ListBucket",
-    "s3:GetBucketLocation",
-    "s3:CreateBucket",
-    "s3:DeleteBucket",
-    "s3:PutBucketVersioning",
-    "s3:GetBucketVersioning",
-    "s3:GetBucketPolicy",
-    "s3:GetBucketAcl"
+    "s3:*"
   ]
+}
+
+variable "resource_arns" {
+  description = "List of AWS resource ARNs the role should have permissions on"
+  type        = list(string)
+  default     = ["*"]
 }

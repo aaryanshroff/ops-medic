@@ -4,7 +4,7 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
   client_id_list = ["sts.amazonaws.com"]
 
   thumbprint_list = [
-    "6938fd4d98bab03faadb97b34396831e3780aea1"  # GitHub's OIDC thumbprint
+    "6938fd4d98bab03faadb97b34396831e3780aea1"
   ]
 }
 
@@ -41,9 +41,9 @@ resource "aws_iam_role_policy" "github_actions_s3" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = var.iam_permissions
-        Resource = "*"
+        Effect   = "Allow"
+        Action   = var.iam_permissions
+        Resource = var.resource_arns
       }
     ]
   })

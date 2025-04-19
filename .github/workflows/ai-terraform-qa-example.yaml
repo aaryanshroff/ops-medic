@@ -21,7 +21,7 @@ jobs:
         
       - name: Terraform Init
         run: |
-          cd terraform
+          cd terraform/s3
           terraform init
           
       - name: Terraform Plan
@@ -29,12 +29,12 @@ jobs:
           TF_LOG: DEBUG
           TF_VAR_github_repository: ${{ github.repository }} # Pass the repository name as a TF variable
         run: |
-          cd terraform
-          terraform plan -target=module.test_bucket -out=tfplan
+          cd terraform/s3
+          terraform plan -out=tfplan
         
       - name: Terraform Apply
         run: |
-          cd terraform
+          cd terraform/s3
           terraform apply -auto-approve tfplan
 
   ai-qa-check:

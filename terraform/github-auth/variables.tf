@@ -1,0 +1,1 @@
+// This file is intentionally empty as variables are defined in main.tf

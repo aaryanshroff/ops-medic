@@ -52,7 +52,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: aaryanshroff/ai-terraform-qa-action@v0.0.8
+      - uses: aaryanshroff/ai-terraform-qa-action@v0.0.9
         with:
           tf_apply_job: "terraform-apply"
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}

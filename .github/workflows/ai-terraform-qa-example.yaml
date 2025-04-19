@@ -4,10 +4,36 @@ on: [push]
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
-      - run: echo "Hello World"
-  
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-west-2
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
+      - name: Terraform Init
+        run: |
+          cd terraform
+          terraform init
+          
+      - name: Terraform Plan
+        run: |
+          cd terraform
+          terraform plan -target=module.test_bucket -out=tfplan
+        
+      - name: Terraform Apply
+        run: |
+          cd terraform
+          terraform apply -auto-approve tfplan
+
   ai-qa-check:
     runs-on: ubuntu-latest
     needs: terraform-apply

@@ -25,6 +25,9 @@ jobs:
           terraform init
           
       - name: Terraform Plan
+        env:
+          TF_LOG: DEBUG
+          TF_VAR_github_repository: ${{ github.repository }} # Pass the repository name as a TF variable
         run: |
           cd terraform
           terraform plan -target=module.test_bucket -out=tfplan

@@ -19,17 +19,24 @@ provider "aws" {
   region = "us-west-2"
 }
 
-module "s3_bucket" {
-  # Adjust source path relative to this directory
-  source = "../modules/s3-bucket"
+resource "aws_s3_bucket" "bucket" {
+  bucket_prefix = "ops-medic-"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_versioning" "bucket_versioning" {
+  bucket = aws_s3_bucket.bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 output "bucket_arn" {
   description = "ARN of the created S3 bucket"
-  value       = module.s3_bucket.bucket_arn
+  value       = aws_s3_bucket.bucket.arn
 }
 
 output "bucket_name" {
   description = "Name of the created S3 bucket"
-  value       = module.s3_bucket.bucket_id # Assuming the module outputs bucket_id as the name
+  value       = aws_s3_bucket.bucket.id
 }
